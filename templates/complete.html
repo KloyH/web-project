@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Успешно!</h1>
+    <p class="lead">Товар {{ item.title }} успешно продан пользователем {{ user.name }} и
+        'будет отвезён' по адресу {{ user.address }}.</p><br>
+    <p class="lead">(чтобы вернуться на главную кликните на 'Рынок' слева сверху).</p>
+  </div>
+</div>
+{% endblock %}

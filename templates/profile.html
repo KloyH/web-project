@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Вас зовут: {{ current_user.name }}</h1>
+<h2>Баланс: {{ current_user.money }}</h2>
+<a class="btn btn-success" href="/money">Пополнить Счёт</a>
+<a class="btn btn-success" href="/logout">Выйти</a>
+<h3>Тут все ваши, или купленные, предложения:</h3>
+{% for item in offers%}
+<h2>{{item.title}}</h2>
+    <div>
+        {{item.content}}
+    </div>
+    <div>
+        Владелец - {{item.user.name}}, Дата размещения - {{item.created_date}}
+    </div>
+    {% if current_user.is_authenticated and current_user == item.user and item.is_selled %}
+    <div>
+        <a href="/resell/{{ item.id }}" class="btn btn-warning">Перепродать</a>
+    </div>
+    {% else %}
+    <div>
+        <a href="/news/{{ item.id }}" class="btn btn-warning">Изменить</a>
+        <a href="/news_delete/{{ item.id }}" class="btn btn-danger">Удалить</a>
+    </div>
+    {% endif %}
+    <div>
+        Цена: {{ item.price }} Рублей
+    </div>
+{% endfor %}
+{% endblock %}
